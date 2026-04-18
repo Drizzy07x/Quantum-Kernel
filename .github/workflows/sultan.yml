@@ -24,6 +24,9 @@ jobs:
       matrix:
         features: ["stock", "wksu-susfs"]
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       #- name: Maximize Build Space
       #  uses: AdityaGarg8/remove-unwanted-software@v5
       #  with:
@@ -67,7 +70,7 @@ jobs:
 
           # Clone repositories using the branch names
           git clone https://github.com/TheWildJames/AnyKernel3.git -b "$ANYKERNEL_BRANCH"
-          git clone https://github.com/TheWildJames/kernel_patches.git
+          git clone https://github.com/TheWildJames/kernel_patches.git wild_kernel_patches
           git clone https://github.com/kerneltoast/android_kernel_google_tensynos
           SUSFS_BRANCH="gki-${{ inputs.android_version }}-${{ inputs.kernel_version }}"
           git clone https://gitlab.com/simonpunk/susfs4ksu.git -b "$SUSFS_BRANCH"
@@ -99,12 +102,10 @@ jobs:
           cp ../susfs4ksu/kernel_patches/include/linux/* ./include/linux/
 
           # Copy local compatibility fixes
-          cp ../kernel_patches/sultan/open.c_fix.patch ./
-          cp ../kernel_patches/sultan/sys.c_fix.patch ./
+          cp "$GITHUB_WORKSPACE/kernel_patches/sultan/open.c_fix.patch" ./
+          cp "$GITHUB_WORKSPACE/kernel_patches/sultan/sys.c_fix.patch" ./
 
           # Apply upstream SUSFS patch first.
-          # We allow a partial apply here because Sultan's tree already diverged,
-          # but we do NOT continue silently if rejects remain after our local fixes.
           patch -p1 < 50_add_susfs_in_gki-${{ inputs.android_version }}-${{ inputs.kernel_version }}.patch || true
 
           # Apply local compatibility fixes for Sultan tree
@@ -130,7 +131,7 @@ jobs:
           else
             echo "CONFIG_KSU_MANUAL_HOOKS=y" >> ./arch/arm64/configs/${{ inputs.codename }}_defconfig
             echo "CONFIG_KSU_SUSFS=n" >> ./arch/arm64/configs/${{ inputs.codename }}_defconfig
-            cp ../kernel_patches/wild/hooks/69_pure_manual_hooks_only.patch ./
+            cp "$GITHUB_WORKSPACE/wild_kernel_patches/wild/hooks/69_pure_manual_hooks_only.patch" ./
             patch -p1 < 69_pure_manual_hooks_only.patch
           fi
 
