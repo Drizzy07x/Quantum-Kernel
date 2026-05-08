@@ -107,6 +107,26 @@ Quantum-Kernel is not intended to be:
 - A random tweak collection
 - A replacement for proper testing
 
+## Credits
+
+Quantum-Kernel exists because of the work of the Android kernel community.
+
+Special credit to:
+
+- Sultan / kerneltoast for the Pixel Tensor kernel base
+- WildKernels for Wild KSU and Sultan KernelSU/SUSFS-related work
+- tiann and KernelSU contributors for KernelSU
+- simonpunk for SUSFS work
+- sidex15 for SUSFS for KernelSU and related module work
+- TheWildJames and related community resources where applicable
+- Google and the Android kernel community
+
+Testing credit:
+
+- Ne0ns4l4m4nder for testing Quantum-Kernel builds and helping validate real-device behavior
+
+This project is maintained by Drizzy_07.
+
 ## Flashing Warning
 
 Flash at your own risk.
