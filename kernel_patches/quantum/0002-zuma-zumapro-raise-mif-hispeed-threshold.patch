@@ -1,0 +1,22 @@
+--- a/google-devices/zuma/dts/zuma.dtsi	2026-04-19 06:22:08.260203274 +0000
++++ b/google-devices/zuma/dts/zuma.dtsi	2026-04-19 06:22:08.284628919 +0000
+@@ -828,7 +828,7 @@
+ 			target_load = <20 40>;
+ 			min_sample_time = <20>;
+ 			hold_sample_time = <60>;
+-			hispeed_load = <100>;
++			hispeed_load = <120>;
+ 			hispeed_freq = <1352000>;
+ 
+ 			/* boot_info */
+--- a/google-devices/zumapro/dts/zumapro.dtsi	2026-04-19 06:22:08.326879188 +0000
++++ b/google-devices/zumapro/dts/zumapro.dtsi	2026-04-19 06:22:08.347420807 +0000
+@@ -1007,7 +1007,7 @@
+ 			target_load = <20 40>;
+ 			min_sample_time = <20>;
+ 			hold_sample_time = <60>;
+-			hispeed_load = <100>;
++			hispeed_load = <120>;
+ 			hispeed_freq = <1352000>;
+ 
+ 			/* boot_info */
